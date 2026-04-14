@@ -1,0 +1,12 @@
+{
+  "name": "ade-connector",
+  "version": "1.0.0",
+  "description": "Connettore esterno per consultazione AdE",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
