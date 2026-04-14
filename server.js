@@ -32,16 +32,23 @@ app.post("/health", (req, res) => {
 });
 
 app.post("/consultazione", async (req, res) => {
-  try {
-    const token = getBearerToken(req);
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.replace("Bearer ", "");
 
-    if (!CONNECTOR_TOKEN || token !== CONNECTOR_TOKEN) {
-      return res.status(401).json({
-        ok: false,
-        code: "TOKEN_NON_VALIDO",
-        message: "Token non valido",
-      });
+  if (!CONNECTOR_TOKEN || token !== CONNECTOR_TOKEN) {
+    return res.status(401).json({
+      ok: false,
+      message: "Token non valido",
+    });
+  }
+
+  return res.json({
+    documents: [],
+    meta: {
+      message: "Nessun documento trovato"
     }
+  });
+});
 
     const { clienteId, tipoDocumento, dataDal, dataAl } = req.body || {};
 
